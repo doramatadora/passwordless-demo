@@ -1,0 +1,40 @@
+# This file describes a Fastly Compute package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = ["dmilitaru@fastly.com"]
+description = "Passwordless authentication using Passkeys (WebAuthn), running on Fastly Compute."
+language = "javascript"
+manifest_version = 3
+name = "passwordless-chat-demo"
+service_id = "VwhcFdJhIM4AwaoJhJrT21"
+
+[local_server]
+
+  [local_server.backends]
+
+    [local_server.backends.origin]
+      url = "https://fanout-chat.glitch.me/"
+
+  [local_server.kv_stores]
+
+    [[local_server.kv_stores.passkey-store]]
+      data = "{\"id\":\"uuid\",\"name\":\"dora\",\"devices\":[]}"
+      key = "example.user"
+
+[scripts]
+  build = "npm run build"
+  post_init = "npm install"
+
+[setup]
+
+  [setup.backends]
+
+    [setup.backends.origin]
+      address = "fanout-chat.glitch.me"
+      description = "A basic real-time chat app, with API-key authentication, running on Glitch."
+      port = 443
+
+  [setup.kv_stores]
+
+    [setup.kv_stores.passkey-store]
+      description = "Stores user data and persists state for the passkey demo"

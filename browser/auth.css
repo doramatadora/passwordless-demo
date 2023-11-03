@@ -1,0 +1,200 @@
+:root {
+  --text-dark: #060606;
+  --text-light: #e5e5ea;
+
+  --sent-bg: #4B737B;
+  --received-bg: #8AB4F7;
+  --announcer-bg: #2b4450;
+
+  --half-rounded: 5px;
+  --rounded: 10px;
+  --2x-rounded: 20px;
+
+  --bg-page: #202124;
+  --bg-header: linear-gradient(to right, #2c3139, #252931);
+  --border: #112C3E;
+  --outline-color: #8AB4F7;
+}
+
+/* Basic page style resets */
+* {
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-page) center/cover no-repeat;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  scroll-behavior: smooth;
+  scroll-padding-block-start: 100px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  width: 90%;
+  max-width: 350px;
+  padding: var(--2x-rounded);
+  border-radius: var(--rounded);
+  background: var(--bg-header) center/cover no-repeat;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: auto auto;
+  grid-column-gap: var(--rounded);
+  grid-row-gap: var(--rounded);
+  margin-bottom: var(--2x-rounded);
+}
+
+header>svg {
+  grid-row: span 2;
+}
+
+header>p {
+  font-size: 0.9em;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+main,
+#passkeySupported {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--rounded);
+}
+
+.input,
+aside,
+button {
+  border-radius: var(--half-rounded);
+}
+
+.input,
+button {
+  font-size: 1em;
+  padding: var(--rounded) var(--2x-rounded);
+}
+
+.input {
+  font-size: 1.15em;
+  background-color: transparent;
+  border: 0 none;
+  border: 1px solid var(--received-bg);
+  color: var(--received-bg);
+}
+
+button {
+  font-weight: bold;
+  background-color: var(--received-bg);
+  color: var(--text-dark);
+  text-align: center;
+  border: 0 none;
+}
+
+button:hover,
+button:active {
+  filter: brightness(1.1);
+}
+
+input:focus,
+button:focus {
+  outline: thin solid var(--received-bg);
+  border: 0 none;
+  color: var(--text-light);
+  background: var(--bg-page);
+}
+
+p {
+  color: var(--text-light);
+}
+
+p a {
+  color: inherit;
+  text-decoration: none;
+}
+
+p a:hover, p a:active {
+  text-decoration: underline;
+}
+
+h1 {
+  margin: 0;
+  margin-top: var(--rounded);
+  color: var(--text-light);
+}
+
+h2 {
+  font-size: 1.1em;
+  margin: 0;
+}
+
+#passkeySupported,
+#passkeyNotSupported {
+  display: none;
+}
+
+#announcer {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  text-align: center;
+  max-width: 400px;
+  border-radius: 10px;
+  padding: 1em 2em;
+  box-shadow: var(--bg-page) 0px 10px 20px 0px;
+  z-index: 100;
+  color: var(--text-light);
+  background-color: #2b4450;
+}
+
+#fingerprint {
+  width: 100%;
+  fill: var(--sent-bg);
+  margin: 0 auto;
+}
+
+#divider {
+  text-align: center;
+  font-size: 0.7em;
+  color: var(--text-light);
+}
+
+.code-button svg {
+  width: 2em;
+  height: 2em;
+  fill: var(--text-light);
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.code-button svg:hover {
+  opacity: 1;
+}
