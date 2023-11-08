@@ -333,7 +333,7 @@ async function handleRequest (event) {
   }
 
   const cacheOverride =
-    req.method === 'GET' || req.headers.get('content-type')?.includes('text/')
+    req.method === 'GET' || /\/(css|javascript|svg)/.test(req.headers.get('content-type') || '')
       ? new CacheOverride('override', { ttl: 10, swr: 86_400 })
       : new CacheOverride('pass')
 
