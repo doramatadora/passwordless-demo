@@ -1,0 +1,16 @@
+name: Deploy Application to Fastly Compute
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install project dependencies
+      run: npm install
+
+    - name: Deploy to Fastly Compute
+      uses: fastly/compute-actions@v5
+      env:
+        FASTLY_API_TOKEN: ${{ secrets.FASTLY_API_TOKEN }}

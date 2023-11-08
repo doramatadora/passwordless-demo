@@ -42,12 +42,14 @@ cp .env.local .env
 npm install
 ```
 
-If you like, check out the companion application (real-time chat), set it up and run it by following the instructions in [doramatadora/fanout-chat](https://github.com/doramatadora/fanout-chat), then update the following section in [`fastly.toml`](./fastly.toml):
+Check out the companion application (real-time chat), set it up and run it by following the instructions in [doramatadora/fanout-chat](https://github.com/doramatadora/fanout-chat), then update the following section in [`fastly.toml`](./fastly.toml):
 
 ```toml
     [local_server.backends.origin]
       url = "http://localhost:7999/"
 ```
+
+> TIP 💡 You can replace the origin backend with another URL if you like.
 
 Run `fastly compute serve` to spin up a local development server and see the demo in action, or `fastly compute serve --watch` if you want to hot-reload any changes to the code.
 

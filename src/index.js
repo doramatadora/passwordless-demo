@@ -328,13 +328,13 @@ async function handleRequest (event) {
   }
 
   // ✨ REAL-TIME WITH FASTLY FANOUT ✨
-  if (req.headers.get('accept').includes('text/event-stream')) {
+  if (req.headers.get('accept')?.includes('text/event-stream')) {
     return createFanoutHandoff(req, ORIGIN_BACKEND_NAME)
   }
 
   const cacheOverride =
-    req.method === 'GET' || req.headers.get('content-type').includes('text/')
-      ? new CacheOverride('swr')
+    req.method === 'GET' || req.headers.get('content-type')?.includes('text/')
+      ? new CacheOverride('override', { ttl: 10, swr: 86_400 })
       : new CacheOverride('pass')
 
   // Pass everything else to the origin.

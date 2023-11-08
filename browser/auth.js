@@ -1,4 +1,4 @@
-const REDIRECT_AFTER_AUTH = '/room/dev'
+const REDIRECT_AFTER_AUTH = '/room/devops-bcn'
 
 // Note: This script uses @simplewebauthn/browser, a lightweight wrapper around
 // the Web Authentication API: https://simplewebauthn.dev/docs/packages/browser
@@ -41,6 +41,7 @@ const webAuthnRegister = async userName => {
   // 1. Get registration options from the Relying Party (RP) server (Fastly Compute).
   const optionsReq = await fetch(`/registration/options?name=${userName}`)
   const options = await optionsReq.json()
+  if (!optionsReq.ok && options.error) throw new Error(options.error)
   console.debug('Registration options from RP', options)
 
   // 2. Submit registration options to the authenticator.
@@ -65,6 +66,7 @@ const webAuthnAuthenticate = async (userName, redirect) => {
   // 1. Get authentication options from the Relying Party (RP) server (Fastly Compute).
   const optionsReq = await fetch(`/authentication/options?name=${userName}`)
   const options = await optionsReq.json()
+  if (!optionsReq.ok && options.error) throw new Error(options.error)
   console.debug('Authentication options from RP', options)
 
   // 2. Submit authentication options to the authenticator.
