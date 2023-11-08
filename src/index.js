@@ -50,6 +50,8 @@ async function handleRequest (event) {
     env('FASTLY_SERVICE_VERSION') || 'local'
   )
 
+  const IS_LOCAL = !Boolean(env('FASTLY_SERVICE_VERSION'))
+
   const req = event.request
   const url = new URL(req.url)
   const qs = url.searchParams
@@ -328,7 +330,7 @@ async function handleRequest (event) {
   }
 
   // ✨ REAL-TIME WITH FASTLY FANOUT ✨
-  if (req.headers.get('accept')?.includes('text/event-stream')) {
+  if (!IS_LOCAL && req.headers.get('accept')?.includes('text/event-stream')) {
     return createFanoutHandoff(req, ORIGIN_BACKEND_NAME)
   }
 

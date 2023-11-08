@@ -3,3 +3,4 @@
 /pkg
 .env
 .dora
+.env.production

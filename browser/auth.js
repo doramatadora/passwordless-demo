@@ -34,6 +34,8 @@ const postJsonTo = async (url, body) =>
     body: JSON.stringify(body)
   })
 
+const getLocalStoredUser = () => /localhost:/.test(location.host) ? null : localStorage.getItem('userName')
+
 /**
  * Registration
  */
@@ -62,7 +64,7 @@ const webAuthnRegister = async userName => {
  * Authentication
  */
 const webAuthnAuthenticate = async (userName, redirect) => {
-  userName = userName || localStorage.getItem('userName')
+  userName = userName || getLocalStoredUser()
   // 1. Get authentication options from the Relying Party (RP) server (Fastly Compute).
   const optionsReq = await fetch(`/authentication/options?name=${userName}`)
   const options = await optionsReq.json()
@@ -97,8 +99,8 @@ if (browserSupportsWebAuthn()) {
   // Display the form to register or authenticate.
   PASSKEY_SUPPORTED.style.display = 'flex'
 
-  if (localStorage.getItem('userName')) {
-    const userName = localStorage.getItem('userName')
+  if (getLocalStoredUser()) {
+    const userName = getLocalStoredUser()
     AUTH_NAME.value = userName
     USER_NAME.value = userName
     USER_NAME.disabled = true
@@ -127,7 +129,7 @@ if (browserSupportsWebAuthn()) {
   AUTHENTICATE_BUTTON.addEventListener('click', async e => {
     e.preventDefault()
     try {
-      const userName = USER_NAME.value || localStorage.getItem('userName')
+      const userName = USER_NAME.value || getLocalStoredUser()
       if (!userName) {
         announce(`Please enter a username`, 2000)
         return USER_NAME.focus()

@@ -13,7 +13,7 @@ service_id = "VwhcFdJhIM4AwaoJhJrT21"
   [local_server.backends]
 
     [local_server.backends.origin]
-      url = "https://fanout-chat.glitch.me/"
+      url = "http://localhost:7999"
 
   [local_server.kv_stores]
 
