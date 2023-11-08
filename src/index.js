@@ -332,10 +332,7 @@ async function handleRequest (event) {
     return createFanoutHandoff(req, ORIGIN_BACKEND_NAME)
   }
 
-  const cacheOverride =
-    req.method === 'GET' || /\/(css|javascript|svg)/.test(req.headers.get('content-type') || '')
-      ? new CacheOverride('override', { ttl: 10, swr: 86_400 })
-      : new CacheOverride('pass')
+  const cacheOverride = new CacheOverride('pass')
 
   // Pass everything else to the origin.
   return fetch(event.request, {
