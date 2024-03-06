@@ -1,4 +1,4 @@
-const REDIRECT_AFTER_AUTH = '/room/devops-bcn'
+const REDIRECT_AFTER_AUTH = '/room/devops-exchange-ldn'
 
 // Note: This script uses @simplewebauthn/browser, a lightweight wrapper around
 // the Web Authentication API: https://simplewebauthn.dev/docs/packages/browser
